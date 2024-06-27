@@ -16,4 +16,8 @@ When comparing the different models' performances, I want to focus on the positi
 5. **Logistic Regression with Feature Importante and with Balance**: 0.36
 6. **Logistic Regression with Feature Importante but without Balance**: 0.03
 
-With this in mind, the best model picked was the third one: **XGBoost with Feature Importance and with Balance**. XGBoost is an ensemble method that can capture complex relationships in the data and it's more suitable to capture non-linear patterns and interactions between features.
+With this in mind, the best model picked was the third one: **XGBoost with Feature Importance and with Balance**. XGBoost is an ensemble method that can capture complex relationships in the data and it's more suitable to capture non-linear patterns and interactions between features. Plus, XGBoost is highly scalable and effective for large datasets, while LogisticRegression may struggle with very large datasets.
+
+
+# Bugs fixed on `test_model.py`
+- Data could not be loaded because the path was incorrect. After changing `"../data/data.csv"` to `"./data/data.csv"` it worked as expected.
