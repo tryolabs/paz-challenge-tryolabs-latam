@@ -59,9 +59,7 @@ jobs:
       run: gcloud builds submit --region ${{ secrets.GCP_REGION }} --tag ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/challenge/${{ secrets.GCP_IMAGE_NAME }}:latest
 
     - name: Deploy to Cloud Run
-      id: deploy
-      uses: google-github-actions/deploy-cloudrun@v0
       run: gcloud run deploy ${{ secrets.GCP_IMAGE_NAME }} --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/challenge/${{ secrets.GCP_IMAGE_NAME }}:latest --allow-unauthenticated --region ${{ secrets.GCP_REGION }}
 
     - name: Run Stress Test
-      run: make stress-test STRESS_URL=${{ steps.deploy.outputs.url }}
+      run: make stress-test
