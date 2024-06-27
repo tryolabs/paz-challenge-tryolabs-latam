@@ -7,8 +7,6 @@ import xgboost as xgb
 from datetime import datetime
 from typing import Tuple, Union, List
 
-from sklearn.model_selection import train_test_split
-
 
 THRESHOLD_IN_MINUTES = 15
 MODEL_FILE_NAME = "delay_model.pkl"
@@ -113,10 +111,6 @@ class DelayModel:
             target (pd.DataFrame): target.
         """
 
-        x_train, _, y_train, _ = train_test_split(
-            features, target, test_size=0.33, random_state=42
-        )
-
         n_y0 = int((target == 0).sum())
         n_y1 = int((target == 1).sum())
         scale = n_y0 / n_y1
@@ -125,7 +119,7 @@ class DelayModel:
             random_state=1, learning_rate=0.01, scale_pos_weight=scale
         )
 
-        self._model.fit(x_train, y_train)
+        self._model.fit(features, target)
         self.__save_model(MODEL_FILE_NAME)
 
     def predict(
